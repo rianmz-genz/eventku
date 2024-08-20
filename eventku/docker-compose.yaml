@@ -1,0 +1,20 @@
+version: '3.1'
+services:
+  odoo:
+    image: odoo:17
+    ports:
+      - "1705:8069"
+    command: ["--log-level=debug"]
+    container_name: "eventku"
+    restart: "unless-stopped"
+    volumes:
+      - ./conf:/etc/odoo
+      - ./addons:/mnt/extra-addons
+    
+    networks:
+      - dockernet
+
+networks:
+  dockernet:
+    name: dockernet
+    external: true
