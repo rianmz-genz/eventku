@@ -1,0 +1,33 @@
+<odoo>
+    <data>
+        <!-- Define a QWeb template for Swagger UI -->
+        <template id="swagger_ui" name="Swagger UI">
+            <div id="swagger-ui"></div>
+
+            <!-- Swagger UI CSS -->
+            <link rel="stylesheet" type="text/css"
+                href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@latest/swagger-ui.css" />
+
+            <!-- Swagger UI JS -->
+            <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@latest/swagger-ui-bundle.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@latest/swagger-ui-standalone-preset.js"></script>
+
+            <script>
+                // OpenAPI specification as a JavaScript object
+                
+
+                // Initialize Swagger UI
+                const ui = SwaggerUIBundle({
+                    url: '/eventku/static/src/yaml/openapi.yaml',
+                    dom_id: '#swagger-ui',
+                    deepLinking: true,
+                    presets: [
+                        SwaggerUIBundle.presets.apis,
+                        SwaggerUIStandalonePreset
+                    ],
+                    layout: "StandaloneLayout"
+                });
+            </script>
+        </template>
+    </data>
+</odoo>

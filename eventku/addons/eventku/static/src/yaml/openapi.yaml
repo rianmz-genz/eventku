@@ -1,0 +1,133 @@
+openapi: 3.0.0
+info:
+  title: My Coffee API
+  description: This is a full documentation API for My Coffee.
+  version: 1.0.0
+servers:
+  - url: /api
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+
+paths:
+  /login:
+    post:
+      summary: User login
+      tags:
+        - AUTH
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: newuser@gmail.com
+                password:
+                  type: string
+                  example: newpassword
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: Login successful, returns a token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Success"
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        example: eyJ1c2VyX2lkIjogNiwgInVzZXJfbG9naW4iOiAiYWRtQGdtYWlsLmNvbSJ9
+        '400':
+          description: Invalid credentials or other error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Invalid credentials"
+                  data:
+                    type: object
+                    example: {}
+
+  /register:
+    post:
+      summary: User registration
+      tags:
+        - AUTH
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: newuser@gmail.com
+                password:
+                  type: string
+                  example: newpassword
+                name:
+                  type: string
+                  example: My Company
+                logo:
+                  type: string
+                  format: binary
+                  description: "Company logo file"
+              required:
+                - email
+                - password
+                - name
+      responses:
+        '200':
+          description: Registration successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Registration successful"
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      email:
+                        type: string
+                        example: newuser@gmail.com
+                      name:
+                        type: string
+                        example: My Company
+                      logo:
+                        type: string
+                        example: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA..."
+        '400':
+          description: Registration failed or email already registered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Email already registered"
+                  data:
+                    type: object
+                    example: {}

@@ -3,7 +3,7 @@ services:
   odoo:
     image: odoo:17
     ports:
-      - "1705:8069"
+      - "1706:8069"
     command: ["--log-level=debug"]
     container_name: "eventku"
     restart: "unless-stopped"
