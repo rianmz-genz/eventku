@@ -131,3 +131,126 @@ paths:
                   data:
                     type: object
                     example: {}
+
+  /events:
+    post:
+      summary: Create a new event
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - Events
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Tech Conference
+                date_end:
+                  type: string
+                  example: "2024-09-01 09:00:00"
+                date_begin:
+                  type: string
+                  example: "2024-09-01 12:00:00"
+                date_tz:
+                  type: string
+                  example: "Asia/Jakarta"
+                seats_limited:
+                  type: boolean
+                  example: true
+                seats_max:
+                  type: integer
+                  example: 100
+                badge_image:
+                  type: string
+                  format: binary
+                  description: "Badge image file"
+      responses:
+        '200':
+          description: Event created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Event created successfully"
+                  data:
+                    type: object
+        '400':
+          description: Error in creating event
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Invalid input data"
+                  data:
+                    type: object
+                    example: {}
+    get:
+      summary: Get a new event
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - Events
+      responses:
+        '200':
+          description: Event created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Event created successfully"
+                  data:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        example: Tech Conference
+                      date_end:
+                        type: string
+                        example: "2024-09-01 09:00:00"
+                      date_begin:
+                        type: string
+                        example: "2024-09-01 12:00:00"
+                      organizer_id:
+                        type: integer
+                        example: 1
+                      address_id:
+                        type: string
+                        example: 16
+                      date_tz:
+                        type: string
+                        example: "Asia/Jakarta"
+                      seats_limited:
+                        type: boolean
+                        example: true
+                      seats_max:
+                        type: integer
+                        example: 100
+                      badge_image:
+                        type: string
+                        format: binary
+                        description: "Badge image file"
+        '400':
+          description: Error in creating event
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Invalid input data"
+                  data:
+                    type: object
+                    example: {}
